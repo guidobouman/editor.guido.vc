@@ -247,19 +247,15 @@
                 deleteNode: function(el){
                     el.parentNode.removeChild(el);
                 },
-                placeholders: function(){
-
-
-
-                    var placeholders = utils.getElementsByClassName(settings.cssClasses.placeholder, settings.element),
-                        innerText = utils.html.text(settings.element);
+                addplaceholders: function() {
+                    var innerText = utils.html.text(settings.element);
 
                     // Empty Editer
-                    if( innerText === ""  ){
-                        settings.element.innerHTML = '';
+                    if( innerText === ""  ) {
+                        settings.element.innerHTML = "";
 
                         // We need to add placeholders
-                        if(settings.placeholder.length > 0){
+                        if(settings.placeholder.length > 0) {
                             utils.html.addTag(settings.tags.paragraph, false, false);
                             var c = utils.html.lastChild();
                             c.className = settings.cssClasses.placeholder;
@@ -268,13 +264,13 @@
 
                         // Add base P tag and do autofocus
                         utils.html.addTag(settings.tags.paragraph, cache.initialized ? true : settings.autofocus);
-                    } else {
-                        if(innerText !== settings.placeholder){
-                            var i;
-                            for(i=0; i<placeholders.length; i++){
-                                utils.html.deleteNode(placeholders[i]);
-                            }
-                        }
+                    }
+                },
+                deleteplaceholders: function() {
+                    var placeholders = utils.getElementsByClassName(settings.cssClasses.placeholder, settings.element);
+
+                    for(var i = 0; i < placeholders.length; i++) {
+                        utils.html.deleteNode(placeholders[i]);
                     }
                 },
                 clean: function () {
@@ -370,8 +366,14 @@
             }
         },
         intercept = {
+            blur: function(e){
+                utils.html.addplaceholders();
+            },
             focus: function(e){
                 //_log('FOCUSED');
+            },
+            press: function(e){
+                utils.html.deleteplaceholders();
             },
             down: function(e){
 
@@ -420,7 +422,6 @@
                     cache.cmd = true;
                 });
                 utils.html.clean();
-                utils.html.placeholders();
                 action.preserveElementFocus();
             },
             command: {
@@ -488,7 +489,9 @@
             listen: function () {
                 utils.addEvent(settings.element, 'keyup', intercept.up);
                 utils.addEvent(settings.element, 'keydown', intercept.down);
+                utils.addEvent(settings.element, 'keypress', intercept.press);
                 utils.addEvent(settings.element, 'focus', intercept.focus);
+                utils.addEvent(settings.element, 'blur', intercept.blur);
             },
             preserveElementFocus: function(){
 
@@ -547,7 +550,7 @@
 
             // Initialize editor
             utils.html.clean();
-            utils.html.placeholders();
+            utils.html.addplaceholders();
             action.preserveElementFocus();
 
             // Capture Events
