@@ -1,0 +1,30 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700);
+
+body {
+  padding                 : 100px;
+  font-family             : Ubuntu;
+  color                   : #222222;
+  font-weight             : 400;
+  font-size               : 20px;
+}
+
+.editor {
+  margin                  : 0 auto;
+  max-width               : 800px;
+}
+
+h1 {
+  min-height              : 1em;
+  font-weight             : 700;
+  font-size               : 300%;
+}
+
+article {
+  min-height              : 1em;
+}
+
+.Medium,
+.Medium * {
+  min-height: 1em;
+  line-height: 1em;
+}
