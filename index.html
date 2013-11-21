@@ -62,19 +62,29 @@
     </div>
 
     <script>
-        new Medium({
-            element: document.getElementById('title'),
-            placeholder: "Your title",
-            autofocus: true,
-            mode: "inline",
-            maxLength: 100
-        });
-        new Medium({
-            element: document.getElementById('content'),
-            placeholder: "Your content"
-        });
+      new Medium({
+        element: document.getElementById('title'),
+        placeholder: "Your title",
+        autofocus: true,
+        mode: "inline",
+        maxLength: 100
+      });
+      new Medium({
+        element: document.getElementById('content'),
+        placeholder: "Your content"
+      });
 
-        grande.bind();
+      grande.bind();
+    </script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45929320-2', 'guido.vc');
+      ga('send', 'pageview');
     </script>
   </body>
 </html>
