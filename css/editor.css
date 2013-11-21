@@ -3,18 +3,36 @@
   max-width               : 800px;
 }
 
-h1 {
+.Medium,
+.Medium * {
+  line-height             : 1.5em;
+}
+
+h1, h2, h3 {
   min-height              : 1em;
   font-weight             : 700;
   font-size               : 300%;
 }
 
-article {
-  min-height              : 1em;
+h2 {
+  font-size               : 200%;
 }
 
-.Medium,
-.Medium * {
-  min-height: 1em;
-  line-height: 1em;
+h3 {
+  font-size               : 150%;
+}
+
+blockquote {
+  margin-left             : 0;
+  padding-left            : 25px;
+  border-left             : 5px solid #000000;
+  font-style              : italic;
+}
+
+hr {
+  margin                  : 20px auto;
+  max-width               : 300px;
+  height                  : 0;
+  border                  : 0;
+  border-bottom           : 1px solid #000000;
 }
