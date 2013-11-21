@@ -33,7 +33,3 @@
   opacity: 0.5;
   pointer-events: none;
 }
-
-.Medium.Medium-rich[data-placeholder]:empty:before {
-  font-style:italic;
-}
