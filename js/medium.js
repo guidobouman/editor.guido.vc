@@ -517,7 +517,6 @@
         this.destroy = function(){
             utils.removeEvent(settings.element, 'keyup', intercept.up);
             utils.removeEvent(settings.element, 'keydown', intercept.down);
-            utils.removeEvent(settings.element, 'focus', intercept.focus);
         };
 
         init(userOpts);
