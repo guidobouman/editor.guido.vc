@@ -38,8 +38,8 @@
       tagClassMap = {
         "b": "bold",
         "i": "italic",
-        "h1": "header1",
-        "h2": "header2",
+        "h2": "header1",
+        "h3": "header2",
         "a": "url",
         "blockquote": "quote"
       };
