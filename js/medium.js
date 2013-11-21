@@ -49,8 +49,7 @@
             },
             cssClasses: {
                 editor: 'Medium',
-                pasteHook: 'Medium-paste-hook',
-                placeholder: 'Medium-placeholder'
+                pasteHook: 'Medium-paste-hook'
             },
             attributes: {
                 remove: ['style','class']
@@ -247,32 +246,6 @@
                 deleteNode: function(el){
                     el.parentNode.removeChild(el);
                 },
-                addplaceholders: function() {
-                    var innerText = utils.html.text(settings.element);
-
-                    // Empty Editer
-                    if( innerText === ""  ) {
-                        settings.element.innerHTML = "";
-
-                        // We need to add placeholders
-                        if(settings.placeholder.length > 0) {
-                            utils.html.addTag(settings.tags.paragraph, false, false);
-                            var c = utils.html.lastChild();
-                            c.className = settings.cssClasses.placeholder;
-                            utils.html.text(c, settings.placeholder);
-                        }
-
-                        // Add base P tag and do autofocus
-                        utils.html.addTag(settings.tags.paragraph, cache.initialized ? true : settings.autofocus);
-                    }
-                },
-                deleteplaceholders: function() {
-                    var placeholders = utils.getElementsByClassName(settings.cssClasses.placeholder, settings.element);
-
-                    for(var i = 0; i < placeholders.length; i++) {
-                        utils.html.deleteNode(placeholders[i]);
-                    }
-                },
                 clean: function () {
 
                     /*
@@ -293,9 +266,7 @@
                         // Remove attributes
                         for(k=0; k<attsToRemove.length; k++){
                             if( child.hasAttribute( attsToRemove[k] ) ){
-                                if( child.getAttribute( attsToRemove[k] ) !== settings.cssClasses.placeholder ){
-                                    child.removeAttribute( attsToRemove[k] );
-                                }
+                                child.removeAttribute( attsToRemove[k] );
                             }
                         }
 
@@ -366,17 +337,7 @@
             }
         },
         intercept = {
-            blur: function(e){
-                utils.html.addplaceholders();
-            },
-            focus: function(e){
-                //_log('FOCUSED');
-            },
-            press: function(e){
-                utils.html.deleteplaceholders();
-            },
             down: function(e){
-
                 utils.isCommand(e, function(){
                     cache.cmd = true;
                 }, function(){
@@ -399,12 +360,8 @@
                 });
 
                 if( settings.maxLength !== -1 ){
-                    var ph = settings.element.getElementsByClassName(settings.cssClasses.placeholder)[0],
-                        len = utils.html.text().length;
+                    var len = utils.html.text().length;
 
-                    if(settings.placeholder && ph){
-                        len -= settings.placeholder.length;
-                    }
                     if( len >= settings.maxLength && utils.isNotSpecial(e) ){
                         return utils.preventDefaultEvent(e);
                     }
@@ -489,9 +446,6 @@
             listen: function () {
                 utils.addEvent(settings.element, 'keyup', intercept.up);
                 utils.addEvent(settings.element, 'keydown', intercept.down);
-                utils.addEvent(settings.element, 'keypress', intercept.press);
-                utils.addEvent(settings.element, 'focus', intercept.focus);
-                utils.addEvent(settings.element, 'blur', intercept.blur);
             },
             preserveElementFocus: function(){
 
@@ -547,10 +501,10 @@
             settings.element.contentEditable = true;
             settings.element.className += (" ")+settings.cssClasses.editor;
             settings.element.className += (" ")+settings.cssClasses.editor+"-"+settings.mode;
+            settings.element.dataset.placeholder = settings.placeholder;
 
             // Initialize editor
             utils.html.clean();
-            utils.html.addplaceholders();
             action.preserveElementFocus();
 
             // Capture Events
