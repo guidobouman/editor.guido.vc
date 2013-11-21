@@ -412,7 +412,7 @@
 
                 if( !cache.shift ){
 
-                    utils.preventDefaultEvent(e);
+                    //utils.preventDefaultEvent(e);
 
                     var focusedElement = cache.focusedElement;
 
@@ -435,10 +435,9 @@
                             utils.html.addTag('hr', false, false, focusedElement);
                             focusedElement = focusedElement.nextSibling;
                         }
-                        utils.html.addTag(settings.tags.paragraph, true, null, focusedElement);
-                    } else {
-                        utils.html.addTag(settings.tags.paragraph, true, null, focusedElement);
                     }
+
+                    //utils.html.addTag(settings.tags.paragraph, true, null, focusedElement);
                 }
             }
         },
