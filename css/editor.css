@@ -3,7 +3,7 @@
   max-width               : 800px;
 }
 
-.Medium,
+.Medium:not(h1),
 .Medium * {
   line-height             : 1.5em;
 }
